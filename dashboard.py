@@ -31,7 +31,7 @@ else:
     df = pd.read_excel("Superstore.xls", engine='xlrd')
     
 col1, col2 = st.columns((2))
-df["Order Data"] = pd.to_datetime(df["Order Date"])
+df["Order Date"] = pd.to_datetime(df["Order Date"])
 
 # Getting the min and max date
 
