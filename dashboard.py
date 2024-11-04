@@ -26,9 +26,11 @@ if fl is not None:
     elif filename.endswith('.xls'):
         df = pd.read_excel(fl, engine='xlrd')  # Use xlrd for .xls files if legacy format is supported
 else:
-    # Fallback option if no file is uploaded
-    os.chdir(r"D:\Streamlit")
-    df = pd.read_excel("Superstore.xls", engine='xlrd')
+    # Attempt to load a local file as a fallback (only if it exists)
+    try:
+        df = pd.read_excel("Superstore.xls", engine='xlrd')
+    except FileNotFoundError:
+        st.error("No file uploaded and 'Superstore.xls' not found as a fallback.")
     
 col1, col2 = st.columns((2))
 df["Order Date"] = pd.to_datetime(df["Order Date"])
